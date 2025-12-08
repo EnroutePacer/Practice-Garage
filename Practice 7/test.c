@@ -1,4 +1,4 @@
-//组合快速排序(组合插入排序)
+//组合排序(组合快速排序与插入排序)
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,34 +11,24 @@ void swap(int* a, int* b)
 
 int part(int* arr, int p, int q)
 {
-	//设置low和high两个指针
-	int lo = p;
-	int hi = q - 1;
+	//设置同向移动指针
+	int j = p;
+	int i = p - 1;
 	//设置中轴 pivot
 	int mid = (q+p)/2;
 	swap(&arr[q], &arr[mid]);
 	int pivot = arr[q];
 	//开始移动
-	while (1)
+	for (; j < q; j++)
 	{
-		while (arr[lo] <= pivot)
+		if (arr[j] < pivot)
 		{
-			lo++;
-		}
-		while (hi >= p && arr[hi] >= pivot)
-		{
-			hi--;
-		}
-		if (lo >= hi) break;
-		else
-		{
-			swap(&arr[lo], &arr[hi]);
-			lo++;
-			hi--;
+			i++;
+			swap(&arr[j], &arr[i]);
 		}
 	}
-	swap(&arr[lo], &arr[q]);
-	return lo;
+	swap(&arr[i + 1], &arr[q]);
+	return i + 1;
 }
 void insertionsort(int* arr, int start, int end)
 {
@@ -56,7 +46,8 @@ void insertionsort(int* arr, int start, int end)
 }
 void quicksort(int* arr, int start, int end)
 {
-	if (end-start <= 50)
+	if (start >= end) return;
+	if (end-start <= 15)
 	{
 		insertionsort(arr, start, end);
 		return;
