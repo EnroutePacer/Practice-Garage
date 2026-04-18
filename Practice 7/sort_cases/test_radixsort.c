@@ -7,6 +7,12 @@ void radixsort(int* arr, int n)
 if (n <= 1) return;
 uint32_t* data = (uint32_t*)malloc(n * sizeof(uint32_t));
 uint32_t* temp = (uint32_t*)malloc(n * sizeof(uint32_t));
+if (data == NULL || temp == NULL)
+{
+free(data);
+free(temp);
+return;
+}
 for (int i = 0; i < n; i++)
 {
 data[i] = (uint32_t)arr[i] ^ 0x80000000u;
@@ -44,11 +50,17 @@ int main()
 {
 int n = 0;
 printf("请输入数组长度\n");
-scanf_s("%d", &n);
+if (scanf_s("%d", &n) != 1 || n < 0) return 0;
+if (n == 0) return 0;
 int* arr = (int*)malloc(n * sizeof(int));
+if (arr == NULL) return 0;
 for (int i = 0; i < n; i++)
 {
-scanf_s("%d", &arr[i]);
+if (scanf_s("%d", &arr[i]) != 1)
+{
+free(arr);
+return 0;
+}
 }
 radixsort(arr, n);
 printf("\n");

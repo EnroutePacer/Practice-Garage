@@ -45,6 +45,7 @@ void mergesort(int* arr, int n)
 {
 if (n <= 1) return;
 int* temp = (int*)malloc(n * sizeof(int));
+if (temp == NULL) return;
 mergesort_core(arr, temp, 0, n - 1);
 free(temp);
 }
@@ -53,11 +54,17 @@ int main()
 {
 int n = 0;
 printf("请输入数组长度\n");
-scanf_s("%d", &n);
+if (scanf_s("%d", &n) != 1 || n < 0) return 0;
+if (n == 0) return 0;
 int* arr = (int*)malloc(n * sizeof(int));
+if (arr == NULL) return 0;
 for (int i = 0; i < n; i++)
 {
-scanf_s("%d", &arr[i]);
+if (scanf_s("%d", &arr[i]) != 1)
+{
+free(arr);
+return 0;
+}
 }
 mergesort(arr, n);
 printf("\n");
