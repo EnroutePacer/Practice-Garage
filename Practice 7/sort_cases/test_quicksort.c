@@ -1,4 +1,4 @@
-//╫щ║╧┼┼╨Є(╫щ║╧┐ь╦┘┼┼╨Є╙ы▓х╚ы┼┼╨Є)
+//я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜(я┐╜я┐╜╧┐я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜)
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,14 +11,14 @@ void swap(int* a, int* b)
 
 int part(int* arr, int p, int q)
 {
-	//╔ш╓├═м╧Є╥╞╢п╓╕╒ы
+	//я┐╜я┐╜я┐╜я┐╜═мя┐╜я┐╜я┐╜╞╢я┐╜╓╕я┐╜я┐╜
 	int j = p;
 	int i = p - 1;
-	//╔ш╓├╓╨╓с pivot
+	//я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ pivot
 	int mid = (q+p)/2;
 	swap(&arr[q], &arr[mid]);
 	int pivot = arr[q];
-	//┐к╩╝╥╞╢п
+	//я┐╜я┐╜╩╝я┐╜╞╢я┐╜
 	for (; j < q; j++)
 	{
 		if (arr[j] < pivot)
@@ -63,12 +63,18 @@ void quicksort(int* arr, int start, int end)
 int main()
 {
 	int n = 0;
-	printf("╩ф╚ы╩¤╫щ│д╢╚\n");
-	scanf_s("%d", &n);
+	printf("я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜щ│дя┐╜я┐╜\n");
+	if (scanf_s("%d", &n) != 1 || n < 0) return 0;
+	if (n == 0) return 0;
 	int* arr = (int*)malloc(n * sizeof(int));
+	if (arr == NULL) return 0;
 	for (int i = 0; i < n; i++)
 	{
-		scanf_s("%d", &arr[i]);
+		if (scanf_s("%d", &arr[i]) != 1)
+		{
+			free(arr);
+			return 0;
+		}
 	}
 	quicksort(arr, 0, n - 1);
 	printf("\n");
